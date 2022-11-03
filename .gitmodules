@@ -1,0 +1,15 @@
+[submodule "dependencies/glfw"]
+	path = dependencies/glfw
+	url = https://github.com/Tom94/glfw.git
+[submodule "dependencies/eigen"]
+	path = dependencies/eigen
+	url = https://github.com/Tom94/eigen.git
+[submodule "dependencies/tinylogger"]
+	path = dependencies/tinylogger
+	url = https://github.com/Tom94/tinylogger
+[submodule "dependencies/tiny-cuda-nn"]
+	path = dependencies/tiny-cuda-nn
+	url = https://github.com/NVlabs/tiny-cuda-nn
+[submodule "dependencies/dlss"]
+	path = dependencies/dlss
+	url = https://github.com/NVIDIA/DLSS.git
