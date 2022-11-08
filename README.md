@@ -19,8 +19,19 @@ $ cd simple-dlss-demo
 
 Then, use CMake to build the project: (on Windows, this must be in a [developer command prompt](https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=msvc-160#developer_command_prompt))
 ```sh
-instant-ngp$ cmake . -B build
-instant-ngp$ cmake --build build --config RelWithDebInfo -j
+simple-dlss-demo$ cmake . -B build
+simple-dlss-demo$ cmake --build build --config RelWithDebInfo -j
 ```
 
 If the build succeeds, you can now run the code via the `build/testbed_dlss` executable.
+
+## Check the output with python
+
+```python
+>>> import numpy as np
+>>> import matplotlib.pyplot as plt
+>>> x=np.load('out.npy')
+>>> plt.imshow(x)
+<matplotlib.image.AxesImage object at 0x00000193CA1FF7C0>
+>>> plt.show()
+```

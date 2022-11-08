@@ -19,6 +19,7 @@
 #include <neural-graphics-primitives/dlss.h>
 
 #include <tiny-cuda-nn/gpu_memory.h>
+#include <tiny-cuda-nn/multi_stream.h>
 
 #include <memory>
 #include <vector>
@@ -295,6 +296,8 @@ public:
 	const std::shared_ptr<IDlss>& dlss() const {
 		return m_dlss;
 	}
+
+	tcnn::StreamAndEvent m_stream;
 
 private:
 	uint32_t m_spp = 0;

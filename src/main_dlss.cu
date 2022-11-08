@@ -4,7 +4,6 @@
   #include <GL/glew.h>
 #endif
 #include <GLFW/glfw3.h>
-#include <tiny-cuda-nn/multi_stream.h>
 #include <tiny-cuda-nn/common.h>
 #include <Eigen/Dense>
 
@@ -57,8 +56,8 @@ void render_frame(ngp::CudaRenderBuffer& render_buffer)
     std::cout << "render frame begin" << std::endl;
     
     // CUDA stuff
-	tcnn::StreamAndEvent m_stream;
-    render_buffer.clear_frame(m_stream.get());
+	
+    render_buffer.clear_frame(render_buffer.m_stream.get());
     render_buffer.set_color_space(ngp::EColorSpace::Linear);
 	render_buffer.set_tonemap_curve(ngp::ETonemapCurve::Identity);
 
@@ -78,7 +77,7 @@ void render_frame(ngp::CudaRenderBuffer& render_buffer)
     const dim3 threads = { 16, 8, 1 };
 	const dim3 blocks = { tcnn::div_round_up((uint32_t)res.x(), threads.x), tcnn::div_round_up((uint32_t)res.y(), threads.y), 1 };
     float m_dlss_sharpening = 0.0;
-    dlss_prep_kernel<<<blocks, threads, 0, m_stream.get()>>>(
+    dlss_prep_kernel<<<blocks, threads, 0, render_buffer.m_stream.get()>>>(
 			res,
 			render_buffer.depth_buffer(),
 			render_buffer.dlss()->depth(),
@@ -90,9 +89,9 @@ void render_frame(ngp::CudaRenderBuffer& render_buffer)
     std::cout << "run dlss..." << std::endl;
     float m_exposure = 0.0;
     Eigen::Array4f m_background_color = {0.0f, 0.0f, 0.0f, 1.0f};
-    render_buffer.accumulate(m_exposure, m_stream.get());
-    render_buffer.tonemap(m_exposure, m_background_color, ngp::EColorSpace::Linear, m_stream.get());
-    CUDA_CHECK_THROW(cudaStreamSynchronize(m_stream.get()));
+    render_buffer.accumulate(m_exposure, render_buffer.m_stream.get());
+    render_buffer.tonemap(m_exposure, m_background_color, ngp::EColorSpace::Linear, render_buffer.m_stream.get());
+    CUDA_CHECK_THROW(cudaStreamSynchronize(render_buffer.m_stream.get()));
 }
 
 int main() 
