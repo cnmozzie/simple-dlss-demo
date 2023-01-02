@@ -7,7 +7,9 @@ A simple demo with two input color and depth arrays and output a super-resolutio
 - A __C++14__ capable compiler. The following choices are recommended and have been tested:
   - __Windows:__ Visual Studio 2019
   - __Linux:__ GCC/G++ 7.5 or higher
-- [Vulkan SDK](https://vulkan.lunarg.com/) for DLSS support.
+- [Vulkan SDK](https://vulkan.lunarg.com/) for DLSS support. (for ubuntu, just run `apt install vulkan-tools`)
+
+
 
 ## Compilation (Windows & Linux)
 
