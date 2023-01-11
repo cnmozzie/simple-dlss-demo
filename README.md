@@ -8,7 +8,7 @@ A simple demo with two input color and depth arrays and output a super-resolutio
   - __Windows:__ Visual Studio 2019
   - __Linux:__ GCC/G++ 7.5 or higher
 - [Vulkan SDK](https://vulkan.lunarg.com/) for DLSS support. (for ubuntu, just run `apt install vulkan-tools`)
-
+- CUDA Driver higher than 520.x.x
 
 
 ## Compilation (Windows & Linux)
